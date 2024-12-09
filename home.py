@@ -70,6 +70,27 @@ if st.button("Submit"):
     }
 
     db.collection.insert_one(document)
+
+    all_documents = list(collection.find())
+    if all_documents:
+        # Person who filled out the form is the current embedding (vector 1)
+        current_embedding = embeddings.flatten()
+        # Store similar interests of people from our database
+        similliraties = []
+
+        for doc in all_documents:
+            store_embedding = np.array(doc["embeddings"]).flatten()
+            similarity = np.dot(current_embedding, stored_embedding) / (np.linealg.norm(current_embedding)) * np.linealg.norm(store_embedding)
+            similliraties.append(doc, similarity)
+
+            similliraties = sorted(similliraties, key=lambda x:x[1], reverse=True)
+
+            # Print for our top 3 matches
+            st.write(similliraties)
+
+
+
+
     st.success("Your information was submitted correctly")
 else:
     st.warning("Something went wrong")
