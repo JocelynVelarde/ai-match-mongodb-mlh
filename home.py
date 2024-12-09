@@ -5,7 +5,6 @@ import torch
 from transformers import BertTokenizer, BertModel
 import numpy as np
 
-
 user = st.secrets["user"]
 password = st.secrets["password"]
 uri_url = st.secrets["uri"]
@@ -16,6 +15,7 @@ client = MongoClient(uri)
 db = client["techies-responses"]
 collection = client["responses"]
 
+# Create embeddings by stating model and tokenizer which are from BERT in Hugging Face
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained('bert-base-uncased')
 
@@ -62,8 +62,14 @@ if st.button("Submit"):
     concatenated_responses = " ".join(responses.values())
     # Pass on the responses to my embedding model
     embeddings = generate_embeddings(concatenated_responses)
-   
+    #st.write(embeddings)
 
-    st.success("Yai you have been matched!")
+    document = {
+        "responses": responses, 
+        "embeddings": embeddings.tolist()
+    }
+
+    collection.insert_one(document)
+    st.success("Your information was submitted correctly")
 else:
     st.warning("Something went wrong")
