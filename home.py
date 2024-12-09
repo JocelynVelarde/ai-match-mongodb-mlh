@@ -71,7 +71,7 @@ if st.button("Submit"):
 
     db.collection.insert_one(document)
 
-    all_documents = list(collection.find())
+    all_documents = list(db.collection.find())
     if all_documents:
         # Person who filled out the form is the current embedding (vector 1)
         current_embedding = embeddings.flatten()
