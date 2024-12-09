@@ -69,7 +69,7 @@ if st.button("Submit"):
         "embeddings": embeddings.tolist()
     }
 
-    collection.insert_one(document)
+    db.collection.insert_one(document)
     st.success("Your information was submitted correctly")
 else:
     st.warning("Something went wrong")
