@@ -69,9 +69,10 @@ if st.button("Submit"):
         "embeddings": embeddings.tolist()
     }
 
-    db.collection.insert_one(document)
+    client["techies-responses"]["responsesAgain"].insert_one(document)
+    #db.collection.insert_one(document)
 
-    all_documents = list(db.collection.find())
+    all_documents = list(client["techies-responses"]["responsesAgain"].find())
     if all_documents:
         # Person who filled out the form is the current embedding (vector 1)
         current_embedding = embeddings.flatten()
