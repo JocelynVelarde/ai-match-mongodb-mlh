@@ -80,7 +80,7 @@ if st.button("Submit"):
 
         for doc in all_documents:
             store_embedding = np.array(doc["embeddings"]).flatten()
-            similarity = np.dot(current_embedding, stored_embedding) / (np.linealg.norm(current_embedding)) * np.linealg.norm(store_embedding)
+            similarity = np.dot(current_embedding, store_embedding) / (np.linealg.norm(current_embedding)) * np.linealg.norm(store_embedding)
             similliraties.append(doc, similarity)
 
             similliraties = sorted(similliraties, key=lambda x:x[1], reverse=True)
