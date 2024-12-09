@@ -1,9 +1,12 @@
 import streamlit as st
 from pymongo import MongoClient
+import plotly.express as px
 import torch
 #pip install transformers
 from transformers import BertTokenizer, BertModel
 import numpy as np
+from sklearn.decomposition import PCA
+import pandas as pd
 
 user = st.secrets["user"]
 password = st.secrets["password"]
@@ -93,6 +96,19 @@ if st.button("Submit"):
             for match, similarity in similliraties[:3]:
                 st.write(similarity)
                 st.write(match["responses"])
+
+            st.subheader("Embedding graph display")
+            embedding_list = [np.array(doc["embeddings"]).flatten() for doc in all_documents]
+            pca = PCA(n_components=2)
+            reduce_embeddings = pca.fit_transform(embedding_list)
+
+            names = [doc["responses"]["name"] for doc in all_documents]
+            df = pd.DataFrame(reduce_embeddings, columns=["x", "y"])
+
+            df["name"] = names
+            fig = px.scatter(df,title="Embedding plot")
+            st.plotly_chart(fig)
+
 
     st.success("Your information was submitted correctly")
 else:
