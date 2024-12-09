@@ -1,8 +1,13 @@
 import streamlit as st
 from pymongo import MongoClient
+import torch
+#pip install transformers
+from transformers import BertTokenizer, BertModel
+import numpy as np
+
 
 user = st.secrets["user"]
-password = st.secrets["passowrd"]
+password = st.secrets["password"]
 uri_url = st.secrets["uri"]
 
 uri = f"mongodb+srv://{user}:{password}@{uri_url}/?retryWrites=true&w=majority&appName=Cluster0"
@@ -10,6 +15,15 @@ uri = f"mongodb+srv://{user}:{password}@{uri_url}/?retryWrites=true&w=majority&a
 client = MongoClient(uri)
 db = client["techies-responses"]
 collection = client["responses"]
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased')
+
+def generate_embeddings(text):
+    inputs = tokenizer(text, return_tensor='pt', padding=True, truncation=True)
+    output = model(**inputs)
+    embedding = output.last_hidden_state.mean(dim=1).detach().numpy()
+    return embedding
 
 # Write a title
 st.title("Matching app for techies")
