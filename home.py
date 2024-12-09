@@ -91,6 +91,7 @@ if st.button("Submit"):
             st.divider()
             for match, similarity in similliraties[:3]:
                 st.write(similarity)
+                st.write(match["responses"])
 
     st.success("Your information was submitted correctly")
 else:
