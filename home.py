@@ -82,7 +82,7 @@ if st.button("Submit"):
             store_embedding = np.array(doc["embeddings"]).flatten()
             # Cosine similarity formula (nothing new that i invented)
             similarity = np.dot(current_embedding, store_embedding) / (np.linalg.norm(current_embedding)) * np.linalg.norm(store_embedding)
-            similliraties.append(doc, similarity)
+            similliraties.append((doc, similarity))
 
             similliraties = sorted(similliraties, key=lambda x:x[1], reverse=True)
 
