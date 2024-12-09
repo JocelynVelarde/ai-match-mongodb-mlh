@@ -1,5 +1,6 @@
 import streamlit as st
 from pymongo import MongoClient
+import torch
 #pip install transformers
 from transformers import BertTokenizer, BertModel
 import numpy as np
