@@ -39,16 +39,31 @@ st.divider()
 # Add a subheader
 st.subheader("Fill the form to get matched")
 
-st.text_input("What is your name")
-st.text_input("What are your programming languages")
-st.text_input("What is your favorite framework")
-st.text_input("What is your favorite tech conference or blog post")
-st.text_input("Have you contributed to open source, name projects")
-st.text_input("What is your favorite tech celebrity")
-st.text_input("Favorite code editor")
+name = st.text_input("What is your name")
+programming_language = st.text_input("What are your programming languages")
+framework = st.text_input("What is your favorite framework")
+conference_blog = st.text_input("What is your favorite tech conference or blog post")
+open_source = st.text_input("Have you contributed to open source, name projects")
+tech_celebrity = st.text_input("What is your favorite tech celebrity")
+code_editor = st.text_input("Favorite code editor")
 
-if st.button("This is a button"):
-    # Generate potential matches for my tech form
+if st.button("Submit"):
+    # Generate my document to then convert it into embeddings using my function
+    responses = {
+        "name": name, 
+        "programming_language": programming_language,
+        "framework": framework,
+        "conference_blog": conference_blog,
+        "open_source": open_source, 
+        "tech_celebrity": tech_celebrity, 
+        "code_editor": code_editor
+    }
+
+    concatenated_responses = " ".join(responses.values())
+    # Pass on the responses to my embedding model
+    embeddings = generate_embeddings(concatenated_responses)
+   
+
     st.success("Yai you have been matched!")
 else:
     st.warning("Something went wrong")
