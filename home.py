@@ -20,7 +20,7 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained('bert-base-uncased')
 
 def generate_embeddings(text):
-    inputs = tokenizer(text, return_tensor='pt', padding=True, truncation=True)
+    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True)
     output = model(**inputs)
     embedding = output.last_hidden_state.mean(dim=1).detach().numpy()
     return embedding
