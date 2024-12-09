@@ -87,10 +87,10 @@ if st.button("Submit"):
             similliraties = sorted(similliraties, key=lambda x:x[1], reverse=True)
 
             # Print for our top 3 matches
-            st.write(similliraties)
-
-
-
+            st.subheader("Your top 3 matches")
+            st.divider()
+            for match, similarity in similliraties[:3]:
+                st.write(similarity)
 
     st.success("Your information was submitted correctly")
 else:
