@@ -13,5 +13,5 @@ Join Jocelyn. Coach at MLH, for a beginner-friendly track where you’ll dive in
 - [YouTube Recordnig of Live Session Pt1](https://www.youtube.com/live/r2dmJimHiHo?si=XCU7Ts-bFO8GBo69)
 - [YouTube Recordnig of Live Session Pt2](https://www.youtube.com/live/sKas0datVsM?si=7ZRhDh8WjrfcHgmK)
 
-![image](https://github.com/user-attachments/assets/a465c343-e29c-4b1b-bbb3-83ca0dfc0191)[500x300]
+![image](https://github.com/user-attachments/assets/a465c343-e29c-4b1b-bbb3-83ca0dfc0191)
 
